@@ -3,28 +3,38 @@ package com.ap.portfolio.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.sql.Date;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.time.LocalDate;
 
 @Getter @Setter
 @Entity
-public class Experiencie {
+@Table(name = "experiencie")
+public class Experiencie implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idExp;
+    @NotNull
+    @Size(min = 1, max = 45, message = "No cumple con la longitud")
     private String titleExp;
+    @Size(min = 1, max = 255, message = "No cumple con la longitud")
     private String descriptionExp;
-    private Date startDateExp;
-    private Date endDateExp;
+    @NotNull
+    private LocalDate startDateExp;
+    @NotNull
+    private LocalDate endDateExp;
+
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable=false, updatable = false)
+    private User user;
 
     public Experiencie() {
 
     }
 
-    public Experiencie(Long idExp, String titleExp, String descriptionExp, Date startDateExp, Date endDateExp) {
+    public Experiencie(Long idExp, String titleExp, String descriptionExp, LocalDate startDateExp, LocalDate endDateExp) {
         this.idExp = idExp;
         this.titleExp = titleExp;
         this.descriptionExp = descriptionExp;

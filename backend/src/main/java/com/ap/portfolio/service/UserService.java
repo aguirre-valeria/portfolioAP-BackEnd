@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
 
 @Service
@@ -15,33 +14,29 @@ import java.util.List;
 public class UserService {
     private final IUserRepository userRepository;
 
-    @Autowired
     public UserService(IUserRepository userRepository) {
 
         this.userRepository = userRepository;
     }
 
-    public User addUser(User user) {
-
-        return userRepository.save(user);
+    //ENCONTRAR UNO por ID
+    public User findUserById(Long id) {
+        return (User) userRepository.findById(id).orElseThrow(() -> new UserException("Usuario no encontrado"));
     }
-
+    //ENCONTRAR a TODOS
     public List<User> findUsers() {
-
         return userRepository.findAll();
     }
-
-    public User editUser(User user) {
-
+    //AGREGAR UNO
+    public User addUser(User user) {
         return userRepository.save(user);
     }
-
-    public void deleteUser(Long id) {
-
-        userRepository.deleteById(id);
+    //EDITAR UNO
+    public User editUser(User user) {
+        return userRepository.save(user);
     }
-
-    public User findUser(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new UserException("Usuario no encontrado"));
+    //ELIMINAR UNO por ID
+    public void removeUser(Long id) {
+        userRepository.deleteById(id);
     }
 }
