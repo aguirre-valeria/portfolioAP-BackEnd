@@ -25,9 +25,9 @@ public class Education implements Serializable {
     @Size(min = 1, max = 255, message = "No cumple con la longitud")
     private String descriptionEdu;
     @NotNull
-    private LocalDate startDateEdu;
+    private int startDateEdu;
     @NotNull
-    private LocalDate endDateEdu;
+    private int endDateEdu;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="user_id", nullable=false, updatable = false)
@@ -37,7 +37,7 @@ public class Education implements Serializable {
     public Education() {
     }
 
-    public Education(Long idEdu, String titleEdu, String descriptionEdu, LocalDate startDateEdu, LocalDate endDateEdu) {
+    public Education(Long idEdu, String titleEdu, String descriptionEdu, int startDateEdu, int endDateEdu) {
         this.idEdu = idEdu;
         this.titleEdu = titleEdu;
         this.descriptionEdu = descriptionEdu;

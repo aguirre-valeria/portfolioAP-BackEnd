@@ -50,9 +50,9 @@ public class User implements Serializable {
     // @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idExp")
     // private List<Experiencie> experiencieList;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Experiencie> experiencie = new HashSet<>();
+    private Set<Experiencie> experiencies = new HashSet<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Education> education = new HashSet<>();
+    private Set<Education> educations = new HashSet<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Project> projects = new HashSet<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -76,6 +76,27 @@ public class User implements Serializable {
     public void setSkills(Set<Skill> skills) {
         this.skills = skills;
         for (Skill variablelocal : skills) {
+            variablelocal.setUser(this);
+        }
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
+        for (Project variablelocal : projects) {
+            variablelocal.setUser(this);
+        }
+    }
+
+    public void setExperiencies(Set<Experiencie> experiencies) {
+        this.experiencies = experiencies;
+        for (Experiencie variablelocal : experiencies) {
+            variablelocal.setUser(this);
+        }
+    }
+
+    public void setEducations(Set<Education> educations) {
+        this.educations = educations;
+        for (Education variablelocal : educations) {
             variablelocal.setUser(this);
         }
     }

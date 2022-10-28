@@ -22,9 +22,9 @@ public class Experiencie implements Serializable {
     @Size(min = 1, max = 255, message = "No cumple con la longitud")
     private String descriptionExp;
     @NotNull
-    private LocalDate startDateExp;
+    private int startDateExp;
     @NotNull
-    private LocalDate endDateExp;
+    private int endDateExp;
 
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false, updatable = false)
@@ -34,7 +34,7 @@ public class Experiencie implements Serializable {
 
     }
 
-    public Experiencie(Long idExp, String titleExp, String descriptionExp, LocalDate startDateExp, LocalDate endDateExp) {
+    public Experiencie(Long idExp, String titleExp, String descriptionExp, int startDateExp, int endDateExp) {
         this.idExp = idExp;
         this.titleExp = titleExp;
         this.descriptionExp = descriptionExp;
