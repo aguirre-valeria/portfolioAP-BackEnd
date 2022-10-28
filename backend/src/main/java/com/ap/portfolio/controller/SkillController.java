@@ -37,8 +37,9 @@ public class SkillController {
     }
     //ENCONTRAR a TODOS
     @GetMapping("/all")
-    public List<Skill> getSkills() {
-        return skillService.findSkills();
+    public ResponseEntity<List<Skill>> getSkills() {
+        List<Skill> skills = skillService.findSkills();
+        return new ResponseEntity<>(skills, HttpStatus.OK);
     }
     //AGREGAR UNO
     @PostMapping("/create")

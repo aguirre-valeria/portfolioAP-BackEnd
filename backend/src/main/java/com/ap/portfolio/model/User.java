@@ -62,11 +62,12 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(Long id, String name, String surname, String titleProfession, String urlPhoto, String urlBanner, String urlGitHub, String urlLinkedIn) {
+    public User(Long id, String name, String surname, String titleProfession, String description, String urlPhoto, String urlBanner, String urlGitHub, String urlLinkedIn) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.titleProfession = titleProfession;
+        this.description = description;
         this.urlPhoto = urlPhoto;
         this.urlBanner = urlBanner;
         this.urlGitHub = urlGitHub;

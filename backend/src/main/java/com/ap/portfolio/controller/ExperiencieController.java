@@ -2,6 +2,7 @@ package com.ap.portfolio.controller;
 
 import com.ap.portfolio.model.Experiencie;
 import com.ap.portfolio.model.Project;
+import com.ap.portfolio.model.Skill;
 import com.ap.portfolio.service.ExperiencieService;
 import com.ap.portfolio.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.SimpleTimeZone;
 
 @RestController
 @RequestMapping("/experiencie")
@@ -29,8 +31,9 @@ public class ExperiencieController {
     }
     //ENCONTRAR a TODOS
     @GetMapping("/all")
-    public List<Experiencie> getExperiencies() {
-        return experiencieService.findExperiencies();
+    public ResponseEntity<List<Experiencie>> getExperiencies() {
+        List<Experiencie> experiencies = experiencieService.findExperiencies();
+        return new ResponseEntity<>(experiencies, HttpStatus.OK);
     }
     //AGREGAR UNO
     @PostMapping("/create")

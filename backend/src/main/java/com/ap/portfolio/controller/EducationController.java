@@ -2,6 +2,7 @@ package com.ap.portfolio.controller;
 
 import com.ap.portfolio.model.Education;
 import com.ap.portfolio.model.Project;
+import com.ap.portfolio.model.Skill;
 import com.ap.portfolio.model.User;
 import com.ap.portfolio.service.EducationService;
 import com.ap.portfolio.service.ProjectService;
@@ -26,13 +27,14 @@ public class EducationController {
     //ENCONTRAR UNO por ID
     @GetMapping("/id/{id}")
     public ResponseEntity<Education> getEducationById(@PathVariable("id") Long id) {
-        Education education = educationService.findEducationById(id).get();
+        Education education = (Education) educationService.findEducationById(id).get();
         return new ResponseEntity(education, HttpStatus.OK);
     }
     //ENCONTRAR a TODOS
     @GetMapping("/all")
-    public List<Education> getEducations() {
-        return educationService.findEducations();
+    public ResponseEntity<List<Education>> getEducations() {
+        List<Education> educations = educationService.findEducations();
+        return new ResponseEntity<>(educations, HttpStatus.OK);
     }
     //AGREGAR UNO
     @PostMapping("/create")

@@ -1,5 +1,6 @@
 package com.ap.portfolio.controller;
 
+import com.ap.portfolio.model.Skill;
 import com.ap.portfolio.model.User;
 import com.ap.portfolio.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,9 @@ public class UserController {
     }
     //ENCONTRAR a TODOS
     @GetMapping("/all")
-    public List<User> getUsers() {
-        return userService.findUsers();
+    public ResponseEntity<List<User>> getUsers() {
+        List<User> users = userService.findUsers();
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
     //AGREGAR UNO
     @PostMapping("/create")

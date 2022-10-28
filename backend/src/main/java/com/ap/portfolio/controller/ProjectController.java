@@ -1,6 +1,7 @@
 package com.ap.portfolio.controller;
 
 import com.ap.portfolio.model.Project;
+import com.ap.portfolio.model.Skill;
 import com.ap.portfolio.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,8 +35,9 @@ public class ProjectController {
 
     //ENCONTRAR a TODOS
     @GetMapping("/all")
-    public List<Project> getProjects() {
-        return projectService.findProjects();
+    public ResponseEntity<List<Project>> getProjects() {
+        List<Project> projects = projectService.findProjects();
+        return new ResponseEntity<>(projects, HttpStatus.OK);
     }
     //AGREGAR UNO
     @PostMapping("/create")
