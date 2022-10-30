@@ -1,17 +1,13 @@
 package com.ap.portfolio.controller;
 
 import com.ap.portfolio.model.Experiencie;
-import com.ap.portfolio.model.Project;
-import com.ap.portfolio.model.Skill;
 import com.ap.portfolio.service.ExperiencieService;
-import com.ap.portfolio.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.SimpleTimeZone;
 
 @RestController
 @RequestMapping("/experiencie")
@@ -49,8 +45,8 @@ public class ExperiencieController {
     }
     //ELIMINAR UNO por ID
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<?> deleteExperiencie(@PathVariable("id") Long id) {
+    public String deleteExperiencie(@PathVariable("id") Long id) {
         experiencieService.removeExperiencie(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return "La experiencia fue eliminada correctamente";
     }
 }

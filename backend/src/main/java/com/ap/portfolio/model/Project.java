@@ -30,7 +30,7 @@ public class Project implements Serializable {
     @Size(min = 1, max = 255, message = "No cumple con la longitud")
     private String urlDemo;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name="user_id", nullable=false, updatable = false)
     @JsonProperty(access = Access.WRITE_ONLY)
     private User user;

@@ -1,18 +1,13 @@
 package com.ap.portfolio.controller;
 
 import com.ap.portfolio.model.Education;
-import com.ap.portfolio.model.Project;
-import com.ap.portfolio.model.Skill;
-import com.ap.portfolio.model.User;
 import com.ap.portfolio.service.EducationService;
-import com.ap.portfolio.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/education")
@@ -27,7 +22,7 @@ public class EducationController {
     //ENCONTRAR UNO por ID
     @GetMapping("/id/{id}")
     public ResponseEntity<Education> getEducationById(@PathVariable("id") Long id) {
-        Education education = (Education) educationService.findEducationById(id).get();
+        Education education = educationService.findEducationById(id).get();
         return new ResponseEntity(education, HttpStatus.OK);
     }
     //ENCONTRAR a TODOS
@@ -52,7 +47,7 @@ public class EducationController {
     @DeleteMapping("delete/{id}")
         public String deleteEducation(@PathVariable("id") Long id) {
         educationService.removeEducation(id);
-        return "El usuario fue eliminado correctamente";
+        return "La educación fue eliminada correctamente";
     }
 
 }

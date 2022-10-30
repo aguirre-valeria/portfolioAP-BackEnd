@@ -1,6 +1,5 @@
 package com.ap.portfolio.model;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,9 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Getter @Setter
 @Entity
@@ -31,6 +28,9 @@ public class User implements Serializable {
     private String surname;
 
     @NotNull
+    private String email;
+
+    @NotNull
     @Size(min = 1, max = 45, message = "No cumple con la longitud")
     private String titleProfession;
 
@@ -47,25 +47,23 @@ public class User implements Serializable {
     @Size(min = 1, max = 255, message = "No cumple con la longitud")
     private String urlLinkedIn;
 
-    // @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idExp")
-    // private List<Experiencie> experiencieList;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Experiencie> experiencies = new HashSet<>();
+    private List<Experiencie> experiencies;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Education> educations = new HashSet<>();
+    private List<Education> educations;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Project> projects = new HashSet<>();
+    private List<Project> projects;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @Setter(AccessLevel.NONE)
-    private Set<Skill> skills = new HashSet<>();
+    private List<Skill> skills;
 
     public User() {
     }
 
-    public User(Long id, String name, String surname, String titleProfession, String description, String urlPhoto, String urlBanner, String urlGitHub, String urlLinkedIn) {
+    public User(Long id, String name, String surname, String email, String titleProfession, String description, String urlPhoto, String urlBanner, String urlGitHub, String urlLinkedIn) {
         this.id = id;
         this.name = name;
         this.surname = surname;
+        this.email = email;
         this.titleProfession = titleProfession;
         this.description = description;
         this.urlPhoto = urlPhoto;
@@ -74,28 +72,45 @@ public class User implements Serializable {
         this.urlLinkedIn = urlLinkedIn;
     }
 
-    public void setSkills(Set<Skill> skills) {
+    public User(Long id, String name, String surname, String email, String titleProfession, String description, String urlPhoto, String urlBanner, String urlGitHub, String urlLinkedIn, List<Experiencie> experiencies, List<Education> educations, List<Project> projects, List<Skill> skills) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.titleProfession = titleProfession;
+        this.description = description;
+        this.urlPhoto = urlPhoto;
+        this.urlBanner = urlBanner;
+        this.urlGitHub = urlGitHub;
+        this.urlLinkedIn = urlLinkedIn;
+        this.experiencies = experiencies;
+        this.educations = educations;
+        this.projects = projects;
+        this.skills = skills;
+    }
+
+    public void setSkills(List<Skill> skills) {
         this.skills = skills;
         for (Skill variablelocal : skills) {
             variablelocal.setUser(this);
         }
     }
 
-    public void setProjects(Set<Project> projects) {
+    public void setProjects(List<Project> projects) {
         this.projects = projects;
         for (Project variablelocal : projects) {
             variablelocal.setUser(this);
         }
     }
 
-    public void setExperiencies(Set<Experiencie> experiencies) {
+    public void setExperiencies(List<Experiencie> experiencies) {
         this.experiencies = experiencies;
         for (Experiencie variablelocal : experiencies) {
             variablelocal.setUser(this);
         }
     }
 
-    public void setEducations(Set<Education> educations) {
+    public void setEducations(List<Education> educations) {
         this.educations = educations;
         for (Education variablelocal : educations) {
             variablelocal.setUser(this);

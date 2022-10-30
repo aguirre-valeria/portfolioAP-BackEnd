@@ -1,7 +1,6 @@
 package com.ap.portfolio.controller;
 
 import com.ap.portfolio.model.Project;
-import com.ap.portfolio.model.Skill;
 import com.ap.portfolio.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,12 +25,6 @@ public class ProjectController {
         Project project = projectService.findProjectById(id).get();
         return new ResponseEntity(project, HttpStatus.OK);
     }
-    //ENCONTRAR a TODOS
-    // @GetMapping("/all")
-    // public ResponseEntity<List<Project>> getAllProjects() {
-    //    List<Project> projects = projectService.findAllProjects();
-    //    return new ResponseEntity<>(projects, HttpStatus.OK);
-    //}
 
     //ENCONTRAR a TODOS
     @GetMapping("/all")
@@ -55,6 +48,6 @@ public class ProjectController {
     @DeleteMapping("delete/{id}")
     public String deleteProject(@PathVariable("id") Long id) {
         projectService.removeProject(id);
-        return "El usuario fue eliminado correctamente";
+        return "El projecto fue eliminado correctamente";
     }
 }

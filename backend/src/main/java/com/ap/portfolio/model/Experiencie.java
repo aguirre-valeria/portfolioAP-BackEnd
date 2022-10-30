@@ -1,5 +1,7 @@
 package com.ap.portfolio.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,7 +9,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.time.LocalDate;
 
 @Getter @Setter
 @Entity
@@ -26,8 +27,9 @@ public class Experiencie implements Serializable {
     @NotNull
     private int endDateExp;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name="user_id", nullable=false, updatable = false)
+    @JsonProperty(access = Access.WRITE_ONLY)
     private User user;
 
     public Experiencie() {

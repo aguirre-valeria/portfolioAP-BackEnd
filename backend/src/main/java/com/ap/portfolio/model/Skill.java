@@ -18,13 +18,13 @@ public class Skill implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSkill;
-    @NotNull
+
     @Size(min = 1, max = 45, message = "No cumple con la longitud")
     private String nameSkill;
     @NotNull
     private int porcentageSkill;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name="user_id", nullable=false, updatable = false)
     @JsonProperty(access = Access.WRITE_ONLY)
     private User user;

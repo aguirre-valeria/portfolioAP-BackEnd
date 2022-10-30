@@ -1,20 +1,13 @@
 package com.ap.portfolio.controller;
 
 import com.ap.portfolio.model.Skill;
-import com.ap.portfolio.model.User;
-import com.ap.portfolio.repository.IUserRepository;
 import com.ap.portfolio.service.SkillService;
-import com.ap.portfolio.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.validation.Valid;
-import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/skill")
@@ -29,9 +22,6 @@ public class SkillController {
     //ENCONTRAR UNO por ID
     @GetMapping("/id/{id}")
     public ResponseEntity<Skill> getSkillById(@PathVariable("id") Long id) {
-        if (!skillService.existsById(id)) {
-            return new ResponseEntity(ResponseEntity.internalServerError(), HttpStatus.NOT_FOUND);
-        }
         Skill skill = skillService.findSkillById(id).get();
         return new ResponseEntity(skill, HttpStatus.OK);
     }
@@ -43,9 +33,9 @@ public class SkillController {
     }
     //AGREGAR UNO
     @PostMapping("/create")
-    public Skill createSkill(@RequestBody Skill skill, User user) {
-
-        return skillService.createSkill(skill, user);
+    public ResponseEntity<Skill> createSkill(@RequestBody Skill skill) {
+        Skill newSkill = skillService.addSkill(skill);
+        return new ResponseEntity<>(newSkill, HttpStatus.CREATED);
     }
     //EDITAR UNO
     @PutMapping("/update")
@@ -60,5 +50,7 @@ public class SkillController {
         return "El skill fue eliminado correctamente";
     }
 
+
+    //PRUEBA
 
 }

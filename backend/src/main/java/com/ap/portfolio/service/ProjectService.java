@@ -1,10 +1,7 @@
 package com.ap.portfolio.service;
 
 import com.ap.portfolio.model.Project;
-import com.ap.portfolio.model.User;
 import com.ap.portfolio.repository.IProjectRepository;
-import com.ap.portfolio.repository.IUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,9 +1,7 @@
 package com.ap.portfolio.service;
 
 import com.ap.portfolio.model.Education;
-import com.ap.portfolio.model.User;
 import com.ap.portfolio.repository.IEducationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +13,6 @@ import java.util.Optional;
 public class EducationService {
     private final IEducationRepository educationRepository;
 
-    @Autowired
     public EducationService(IEducationRepository educationRepository) {
         this.educationRepository = educationRepository;
     }

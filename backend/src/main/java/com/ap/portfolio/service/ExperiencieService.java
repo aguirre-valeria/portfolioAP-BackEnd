@@ -16,7 +16,6 @@ import java.util.Optional;
 public class ExperiencieService {
     private final IExperiencieRepository experiencieRepository;
 
-    @Autowired
     public ExperiencieService(IExperiencieRepository experiencieRepository) {
         this.experiencieRepository = experiencieRepository;
     }
