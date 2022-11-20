@@ -1,5 +1,6 @@
 package com.ap.portfolio.service;
 
+import com.ap.portfolio.model.Project;
 import com.ap.portfolio.model.User;
 import com.ap.portfolio.repository.IUserRepository;
 import com.ap.portfolio.exception.UserException;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -32,9 +34,10 @@ public class UserService {
         return userRepository.save(user);
     }
     //EDITAR UNO
-    public User editUser(User user) {
+    public User update(User user) {
         return userRepository.save(user);
     }
+
     //ELIMINAR UNO por ID
     public void removeUser(Long id) {
         userRepository.deleteById(id);

@@ -12,10 +12,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Getter @Setter
 @Entity
@@ -85,6 +82,24 @@ public class User implements Serializable, UserDetails {
         this.urlLinkedIn = urlLinkedIn;
     }
 
+    public User(Long id, String name, String surname, String email, String titleProfession, String description, String urlPhoto, String urlBanner, String urlGitHub, String urlLinkedIn, Set<UserRol> userRols, List<Experiencie> experiencies, List<Education> educations, List<Project> projects, List<Skill> skills) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.titleProfession = titleProfession;
+        this.description = description;
+        this.urlPhoto = urlPhoto;
+        this.urlBanner = urlBanner;
+        this.urlGitHub = urlGitHub;
+        this.urlLinkedIn = urlLinkedIn;
+        this.userRols = userRols;
+        this.experiencies = experiencies;
+        this.educations = educations;
+        this.projects = projects;
+        this.skills = skills;
+    }
+
     public User(Long id, String username, String password, boolean enabled) {
         this.id = id;
         this.username = username;
@@ -124,12 +139,12 @@ public class User implements Serializable, UserDetails {
         }
     }
 
-    public void setProjects(List<Project> projects) {
+/*    public void setProjects(List<Project> projects) {
         this.projects = projects;
         for (Project variablelocal : projects) {
             variablelocal.setUser(this);
         }
-    }
+    }*/
 
     public void setExperiencies(List<Experiencie> experiencies) {
         this.experiencies = experiencies;
@@ -296,7 +311,43 @@ public class User implements Serializable, UserDetails {
         return projects;
     }
 
+
+
+    public List<Project> getProject(Optional<Project> update) {
+        return projects;
+    }
+
     public List<Skill> getSkills() {
         return skills;
+    }
+
+    public void addProject(Project project) {
+        projects.add(project);
+        project.setUser(this);
+    }
+
+    public void addSkill(Skill skill) {
+        skills.add(skill);
+        skill.setUser(this);
+    }
+
+    public void addEducation(Education education) {
+        educations.add(education);
+        education.setUser(this);
+    }
+
+    public void addExperiencie(Experiencie experiencie) {
+        experiencies.add(experiencie);
+        experiencie.setUser(this);
+    }
+
+
+    public void removeProject(Project project) {
+        projects.add(project);
+        project.setUser(null);
+    }
+
+    public Long getId(Long idUser) {
+        return idUser;
     }
 }

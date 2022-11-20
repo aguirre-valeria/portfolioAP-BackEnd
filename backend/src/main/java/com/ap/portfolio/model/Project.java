@@ -46,4 +46,33 @@ public class Project implements Serializable {
         this.urlGitHubProj = urlGitHubProj;
         this.urlDemo = urlDemo;
     }
+
+    public Project(Long idProj, String titleProj, String descriptionProj, String urlPhoto, String urlGitHubProj, String urlDemo, User user) {
+        this.idProj = idProj;
+        this.titleProj = titleProj;
+        this.descriptionProj = descriptionProj;
+        this.urlPhoto = urlPhoto;
+        this.urlGitHubProj = urlGitHubProj;
+        this.urlDemo = urlDemo;
+        this.user = user;
+    }
+
+    public Project(Long idProj, String titleProj, String descriptionProj, String urlPhoto, String urlGitHubProj, String urlDemo, Long id) {
+    }
+
+    public Long getIdProj() {
+        return idProj;
+    }
+
+    public Project updateWith(Long idUser, Project project) {
+        return new Project(
+                project.idProj,
+                project.titleProj,
+                project.descriptionProj,
+                project.urlPhoto,
+                project.urlGitHubProj,
+                project.urlDemo,
+                project.user.getId(idUser)
+        );
+    }
 }
