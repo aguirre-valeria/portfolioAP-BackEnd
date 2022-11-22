@@ -25,6 +25,11 @@ public class UserService {
     public User findUserById(Long id) {
         return (User) userRepository.findById(id).orElseThrow(() -> new UserException("Usuario no encontrado"));
     }
+
+    //ENCONTRAR POR USUARIO
+    public User findUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
     //ENCONTRAR a TODOS
     public List<User> findUsers() {
         return userRepository.findAll();

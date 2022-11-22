@@ -63,6 +63,9 @@ public class User implements Serializable, UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Skill> skills;
 
+    public User(String username, String email, String password) {
+    }
+
     public User() {
     }
 

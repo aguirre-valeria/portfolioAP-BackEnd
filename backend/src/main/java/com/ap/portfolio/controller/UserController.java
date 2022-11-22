@@ -22,9 +22,16 @@ public class UserController {
     }
 
     //ENCONTRAR UNO por ID
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
         User user = userService.findUserById(id);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    //ENCONTRAR UNO por Usuario
+    @GetMapping("/{username}")
+    public ResponseEntity<User> getUserLogin(@PathVariable("username") String username) {
+        User user = userService.findUserByUsername(username);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
     //ENCONTRAR a TODOS
