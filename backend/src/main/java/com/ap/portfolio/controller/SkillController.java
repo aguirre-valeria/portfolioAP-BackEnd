@@ -48,43 +48,10 @@ public class SkillController {
     }
 
     @DeleteMapping("delete/{id}")
-    public String deleteSkill(@PathVariable("id") Long id) {
+    public ResponseEntity<Long> deleteSkill(@PathVariable Long idUser, @PathVariable("id") Long id) {
+        User user = userService.findUserById(idUser);
         skillService.removeSkill(id);
-        return "La Skill fue eliminada correctamente";
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
-
-/*    //ENCONTRAR UNO por ID
-    @GetMapping("/id/{id}")
-    public ResponseEntity<Skill> getSkillById(@PathVariable("id") Long id) {
-        Skill skill = skillService.findSkillById(id).get();
-        return new ResponseEntity(skill, HttpStatus.OK);
-    }
-    //ENCONTRAR a TODOS
-    @GetMapping("/all")
-    public ResponseEntity<List<Skill>> getSkills() {
-        List<Skill> skills = skillService.findSkills();
-        return new ResponseEntity<>(skills, HttpStatus.OK);
-    }
-    //AGREGAR UNO
-    @PostMapping("/create")
-    public ResponseEntity<Skill> createSkill(@RequestBody Skill skill) {
-        Skill newSkill = skillService.addSkill(skill);
-        return new ResponseEntity<>(newSkill, HttpStatus.CREATED);
-    }
-    //EDITAR UNO
-    @PutMapping("/update")
-    public ResponseEntity<Skill> updateSkill(@RequestBody Skill skill) {
-        Skill updateSkill = skillService.editSkill(skill);
-        return new ResponseEntity<>(updateSkill, HttpStatus.OK);
-    }
-    //ELIMINAR UNO por ID
-    @DeleteMapping("/delete/{id}")
-    public String deleteSkill(@PathVariable Long id) {
-        skillService.removeSkill(id);
-        return "El skill fue eliminado correctamente";
-    }*/
-
-
-    //PRUEBA
 
 }

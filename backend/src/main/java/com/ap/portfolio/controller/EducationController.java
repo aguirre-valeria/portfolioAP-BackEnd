@@ -49,44 +49,10 @@ public class EducationController {
     }
 
     @DeleteMapping("delete/{id}")
-    public String deleteEducation(@PathVariable("id") Long id) {
+    public ResponseEntity<Long> deleteEducation(@PathVariable Long idUser, @PathVariable("id") Long id) {
+        User user = userService.findUserById(idUser);
         educationService.removeEducation(id);
-        return "La educación fue eliminada correctamente";
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
-
-
-
-/*
-    //ENCONTRAR UNO por ID
-    @GetMapping("/id/{id}")
-    public ResponseEntity<Education> getEducationById(@PathVariable("id") Long id) {
-        Education education = educationService.findEducationById(id).get();
-        return new ResponseEntity(education, HttpStatus.OK);
-    }
-    //ENCONTRAR a TODOS
-    @GetMapping("/all")
-    public ResponseEntity<List<Education>> getEducations() {
-        List<Education> educations = educationService.findEducations();
-        return new ResponseEntity<>(educations, HttpStatus.OK);
-    }
-    //AGREGAR UNO
-    @PostMapping("/create")
-    public ResponseEntity<Education> addEducation(@RequestBody Education education) {
-        Education newEducation = educationService.addEducation(education);
-        return new ResponseEntity<>(newEducation, HttpStatus.CREATED);
-    }
-    //EDITAR UNO
-    @PutMapping("/update")
-    public ResponseEntity<Education> editEducation(@RequestBody Education education) {
-        Education editEducation = educationService.editEducation(education);
-        return new ResponseEntity<>(editEducation, HttpStatus.OK);
-    }
-    //ELIMINAR UNO por ID
-    @DeleteMapping("delete/{id}")
-        public String deleteEducation(@PathVariable("id") Long id) {
-        educationService.removeEducation(id);
-        return "La educación fue eliminada correctamente";
-    }
-*/
 
 }

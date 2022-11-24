@@ -88,8 +88,9 @@ public class ProjectController {
 
     //ELIMINAR UNO por ID
     @DeleteMapping("delete/{id}")
-    public String deleteProject(@PathVariable("id") Long id) {
+    public ResponseEntity<Long> deleteProject(@PathVariable Long idUser, @PathVariable("id") Long id) {
+        User user = userService.findUserById(idUser);
         projectService.removeProject(id);
-        return "El projecto fue eliminado correctamente";
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 }

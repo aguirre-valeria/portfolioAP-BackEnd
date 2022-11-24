@@ -50,9 +50,10 @@ public class ExperiencieController {
 
     //ELIMINAR UNO por ID
     @DeleteMapping("delete/{id}")
-    public String deleteExperiencie(@PathVariable("id") Long id) {
+    public ResponseEntity<Long> deleteExperiencie(@PathVariable Long idUser, @PathVariable("id") Long id) {
+        User user = userService.findUserById(idUser);
         experiencieService.removeExperiencie(id);
-        return "La experiencie fue eliminada correctamente";
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
 /*    //ENCONTRAR UNO por ID

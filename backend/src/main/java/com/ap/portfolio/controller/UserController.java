@@ -47,13 +47,6 @@ public class UserController {
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
-    //EDITAR UNO
-/*    @PutMapping("/update")
-    public ResponseEntity<User> updateUser(@RequestBody User user) {
-        User updateUser = userService.editUser(user);
-        return new ResponseEntity<>(updateUser, HttpStatus.OK);
-    }*/
-
     @PutMapping("/update/{idUser}")
     public ResponseEntity<User> updateUser(@PathVariable Long idUser, @RequestBody User user) {
         User editUser = userService.findUserById(idUser);
