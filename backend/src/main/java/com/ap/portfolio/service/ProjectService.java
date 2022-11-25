@@ -2,6 +2,7 @@ package com.ap.portfolio.service;
 
 import com.ap.portfolio.model.Project;
 import com.ap.portfolio.repository.IProjectRepository;
+import com.ap.portfolio.repository.IUserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,8 +13,10 @@ import java.util.Optional;
 @Transactional
 public class ProjectService {
     private final IProjectRepository projectRepository;
-    public ProjectService(IProjectRepository projectRepository) {
+    private final IUserRepository userRepository;
+    public ProjectService(IProjectRepository projectRepository, IUserRepository userRepository) {
         this.projectRepository = projectRepository;
+        this.userRepository = userRepository;
     }
 
     //ENCONTRAR UNO por ID
@@ -26,11 +29,21 @@ public class ProjectService {
     }
     //AGREGAR UNO
     public Project addProject(Project project) {
+
         return projectRepository.save(project);
     }
     //EDITAR UNO
     public Project editProject(Project project) {
         return projectRepository.save(project);
+    }
+
+    public Optional<Project> update(Long idUser, Long id, Project project) {
+        // Only update an item if it can be found first.
+        return projectRepository.findById(id)
+                .map(oldItem -> {
+                    Project updated = oldItem.updateWith(idUser, project);
+                    return projectRepository.save(updated);
+                });
     }
     //ELIMINAR UNO por ID
     public void removeProject(Long id) {

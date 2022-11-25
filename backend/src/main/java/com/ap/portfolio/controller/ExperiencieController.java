@@ -1,25 +1,62 @@
 package com.ap.portfolio.controller;
 
 import com.ap.portfolio.model.Experiencie;
+import com.ap.portfolio.model.Project;
+import com.ap.portfolio.model.User;
 import com.ap.portfolio.service.ExperiencieService;
+import com.ap.portfolio.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
-@RequestMapping("/experiencie")
+@RequestMapping("/user/{idUser}/experiencies")
 public class ExperiencieController {
     @Autowired
     private final ExperiencieService experiencieService;
 
-    public ExperiencieController(ExperiencieService experiencieService) {
+    @Autowired
+    private final UserService userService;
+
+    public ExperiencieController(ExperiencieService experiencieService, UserService userService) {
         this.experiencieService = experiencieService;
+        this.userService = userService;
     }
 
-    //ENCONTRAR UNO por ID
+    @GetMapping()
+    public ResponseEntity<Collection<Experiencie>> getExperienciesByUser(@PathVariable Long idUser) {
+        User user = userService.findUserById(idUser);
+        return new ResponseEntity<>(user.getExperiencies(), HttpStatus.OK);
+    }
+
+    @PostMapping("/add")
+    public Experiencie addExperiencie(@PathVariable Long idUser, @RequestBody Experiencie experiencie) {
+        User user = userService.findUserById(idUser);
+        user.addExperiencie(experiencie);
+        return experiencieService.addExperiencie(experiencie);
+    }
+
+    @PutMapping("/update/{idExp}")
+    public Experiencie updateExperiencie(@PathVariable Long idUser, @PathVariable("idExp") Long idExp, @RequestBody Experiencie experiencie) {
+        User user = userService.findUserById(idUser);
+        user.addExperiencie(experiencie);
+        experiencieService.removeExperiencie(idExp);
+        return experiencieService.addExperiencie(experiencie);
+    }
+
+    //ELIMINAR UNO por ID
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<Long> deleteExperiencie(@PathVariable Long idUser, @PathVariable("id") Long id) {
+        User user = userService.findUserById(idUser);
+        experiencieService.removeExperiencie(id);
+        return new ResponseEntity<>(id, HttpStatus.OK);
+    }
+
+/*    //ENCONTRAR UNO por ID
     @GetMapping("/id/{id}")
     public ResponseEntity<Experiencie> getExperiencie(@PathVariable("id") Long id) {
         Experiencie experiencie = experiencieService.findExperiencieById(id).get();
@@ -48,5 +85,5 @@ public class ExperiencieController {
     public String deleteExperiencie(@PathVariable("id") Long id) {
         experiencieService.removeExperiencie(id);
         return "La experiencia fue eliminada correctamente";
-    }
+    }*/
 }

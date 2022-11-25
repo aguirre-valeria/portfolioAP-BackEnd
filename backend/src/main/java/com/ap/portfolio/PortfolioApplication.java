@@ -10,6 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -36,12 +37,13 @@ public class PortfolioApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 /*			User user = new User();
-			user.setUsername("alex");
-			user.setPassword("1234");
-			user.setEmail("alex@gmail.com");
+			user.setUsername("admin");
+			// user.setPassword("123456.");
+			user.setPassword(passwordEncoder.encode("123456."));
+			user.setEmail("valee26z@gmail.com");
 			Rol rol = new Rol();
-			rol.setIdRol(2L);
-			rol.setNameRol("NORMAL");
+			rol.setIdRol(1L);
+			rol.setNameRol("ADMIN");
 			Set<UserRol> usersRoles = new HashSet<>();
 			UserRol userRol = new UserRol();
 			userRol.setRol(rol);
@@ -49,7 +51,7 @@ public class PortfolioApplication implements CommandLineRunner {
 			usersRoles.add(userRol);
 
 			User usuarioGuardado = userLoginService.saveUserLogin(user,usersRoles);
-			System.out.println(usuarioGuardado.getUsername()); */
+			System.out.println(usuarioGuardado.getUsername());*/
 
 	}
 
@@ -69,7 +71,7 @@ public class PortfolioApplication implements CommandLineRunner {
 	public CorsFilter corsFilter() {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
 		corsConfiguration.setAllowCredentials(true);
-		corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+		corsConfiguration.setAllowedOrigins(Arrays.asList("*"));
 
 		corsConfiguration.setAllowedHeaders(Arrays.asList("Origin", "Access-Control-Allow-Origin", "Content-Type",
 				"Accept", "Authorization", "Origin, Accept", "X-Requested-With",
