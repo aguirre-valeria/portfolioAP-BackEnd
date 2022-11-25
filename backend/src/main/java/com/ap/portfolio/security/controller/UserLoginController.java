@@ -49,8 +49,8 @@ public class UserLoginController {
         Set<UserRol> userRoles = new HashSet<>();
 
         Rol rol = new Rol();
-        rol.setIdRol(2L);
-        rol.setNameRol("NORMAL");
+        rol.setIdRol(1L);
+        rol.setNameRol("ADMIN");
 
         UserRol userRol = new UserRol();
         userRol.setUser(user);
